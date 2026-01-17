@@ -16,7 +16,7 @@ import ProfileView from './components/ProfileView';
 import BottomNav from './components/BottomNav';
 import SearchView from './components/SearchView';
 import LoyaltyView from './components/LoyaltyView';
-import { AppState, DeliveryType, TabType, CartItem, PaymentMethod, Card, Language } from './types';
+import { AppState, DeliveryType, TabType, CartItem, Language } from './types';
 import { PRODUCTS } from './constants';
 import { translations } from './translations';
 import { CheckCircle } from 'lucide-react';
@@ -47,15 +47,11 @@ const App: React.FC = () => {
       { id: 'c1', last4: '4242', brand: 'visa', expiry: '09/27', holderName: 'ALEX ROMANOV', color: 'bg-gradient-to-br from-indigo-600 to-purple-800' }
     ],
     selectedCardId: 'c1',
-    orders: [
-      { id: 'o1', date: 'Сегодня, 14:20', total: 1250, items: ['Биг Роял', 'Кола'], status: 'delivered', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=100&q=80' },
-      { id: 'o2', date: 'Вчера, 12:05', total: 690, items: ['Пицца Маргарита'], status: 'delivered', image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=100&q=80' }
-    ],
+    orders: [],
     language: 'ru'
   });
 
   const [prevTab, setPrevTab] = useState<TabType | null>(null);
-  const t = translations[state.language];
 
   const handleLanguageChange = (lang: Language) => {
     setState(prev => ({ ...prev, language: lang }));
@@ -206,7 +202,6 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Модальные окна и оверлеи */}
       {state.activeTab === 'search-full' && (
         <SearchView 
           onClose={() => handleTabChange('home')}
